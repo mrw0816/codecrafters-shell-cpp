@@ -6,6 +6,7 @@
 #include "commands/Command.h"
 #include "commands/EchoCommand.h"
 #include "commands/TypeCommand.h"
+#include "commands/ExitCommand.h"
 
 int main() {
     // Flush after every std::cout / std:cerr
@@ -13,6 +14,7 @@ int main() {
     std::cerr << std::unitbuf;
 
     std::unordered_map<std::string, Command*> commands;
+    commands["exit"] = new ExitCommand();
     commands["echo"] = new EchoCommand();
     commands["type"] = new TypeCommand(commands);
 
@@ -30,10 +32,6 @@ int main() {
 
         input >> cmd;
         std::getline(input, args);
-        if(cmd == "exit")
-        {
-            std::exit(0);
-        }
         if (commands.contains(cmd))
         {
             commands[cmd]->execute(args);
