@@ -10,13 +10,10 @@ class EchoCommand : public Command
 
 public:
 
-    EchoCommand();
+    EchoCommand() : Command(Type::Builtin) {}
 
     void execute(std::string args) override;
-
-private:
-    
-    std::string args;
+ 
 };
 
 #endif

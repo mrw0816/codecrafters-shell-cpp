@@ -5,6 +5,7 @@
 
 #include "commands/Command.h"
 #include "commands/EchoCommand.h"
+#include "commands/TypeCommand.h"
 
 int main() {
     // Flush after every std::cout / std:cerr
@@ -13,6 +14,7 @@ int main() {
 
     std::unordered_map<std::string, Command*> commands;
     commands["echo"] = new EchoCommand();
+    commands["type"] = new TypeCommand(commands);
 
     // TODO: Uncomment the code below to pass the first stage
 

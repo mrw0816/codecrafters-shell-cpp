@@ -6,16 +6,27 @@
 class Command {
 
 public:
-    
-    void trim(std::string& line);
 
-    virtual void execute(std::string args) = 0;
+    enum Type
+    {
+        Builtin,
+        External,
+        Unknown
+    };
 
+    Command(Type t) : type(t) {}
     virtual ~Command() = default;
+    
+    virtual void execute(std::string args) = 0;
+   
+    Type getType() const { return type; }
+    void trim(std::string& line);
 
 private:
 
     const std::string WHITESPACE = " \n\r\t\f\v";
+
+    Type type;
 };
 
 #endif

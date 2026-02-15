@@ -1,8 +1,5 @@
-#include "EchoCommand.h"
 
-EchoCommand::EchoCommand()
-{
-}
+#include "EchoCommand.h"
 
 void EchoCommand::execute(std::string args)
 {
