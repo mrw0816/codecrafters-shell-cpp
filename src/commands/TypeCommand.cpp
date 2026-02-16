@@ -73,9 +73,9 @@ void TypeCommand::execute(std::string args)
 
                     //Check for executable permissions
                     fs::perms f_perms = f_status.permissions();
-                    if((fs::perms::owner_exec  & f_perms) != fs::perms::none ||
-                       (fs::perms::group_exec  & f_perms) != fs::perms::none ||
-                       (fs::perms::others_exec & f_perms) != fs::perms::none)
+                    if((fs::perms::owner_exec  & f_perms) != fs::perms::none) //||
+                       //(fs::perms::group_exec  & f_perms) != fs::perms::none ||
+                       //(fs::perms::others_exec & f_perms) != fs::perms::none)
                     {
                         std::cout << args << " is " << path.string() << std::endl;
                         return;
