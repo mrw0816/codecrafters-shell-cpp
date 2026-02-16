@@ -52,8 +52,8 @@ void TypeCommand::execute(std::string args)
                         }
                         //Check for executable permissions
                         if((fs::perms::owner_exec  & f_perms) != fs::perms::none ||
-                            (fs::perms::group_exec  & f_perms) != fs::perms::none ||
-                            (fs::perms::others_exec & f_perms) != fs::perms::none)
+                           (fs::perms::group_exec  & f_perms) != fs::perms::none ||
+                           (fs::perms::others_exec & f_perms) != fs::perms::none)
                         {
                             std::cout << args << " is " << pathToCheck.string() << std::endl;
                             return;
@@ -70,8 +70,8 @@ void TypeCommand::execute(std::string args)
                     }
                     //Check for executable permissions
                     if((fs::perms::owner_exec  & f_perms) != fs::perms::none ||
-                        (fs::perms::group_exec  & f_perms) != fs::perms::none ||
-                        (fs::perms::others_exec & f_perms) != fs::perms::none)
+                       (fs::perms::group_exec  & f_perms) != fs::perms::none ||
+                       (fs::perms::others_exec & f_perms) != fs::perms::none)
                     {
                         std::cout << args << " is " << path.string() << std::endl;
                         return;
