@@ -11,13 +11,13 @@ class TypeCommand : public Command
 
 public:
 
-    TypeCommand(const std::unordered_map<std::string, Command*>& cmds);
+    TypeCommand(const std::unordered_map<std::string, std::unique_ptr<Command>>& cmds);
 
     void execute(std::string args) override;
 
 private:
     
-    const std::unordered_map<std::string, Command*>& commands;
+    const std::unordered_map<std::string, std::unique_ptr<Command>>& commands;
 
 };
 

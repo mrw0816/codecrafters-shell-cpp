@@ -16,6 +16,7 @@ public:
         Unknown
     };
 
+    Command(){}
     Command(Type t) : type(t) {}
     virtual ~Command() = default;
     
@@ -23,20 +24,19 @@ public:
    
     Type getType() const { return type; }
     void trim(std::string& line);
-
-protected:
-    
-    bool exeInPath(std::string command, std::filesystem::path& exePath);
-    std::vector<std::string> getAndParsePath();
+   
+    static bool exeInPath(std::string command);
+    static bool exeInPath(std::string command, std::filesystem::path& exePath);
+    static std::vector<std::string> getAndParsePath();
 
 private:
 
     const std::string WHITESPACE = " \n\r\t\f\v";
 
 #ifdef _WIN32
-    const char SEPARATOR = ';';
+    static const char SEPARATOR = ';';
 #else
-    const char SEPARATOR = ':';
+    static const char SEPARATOR = ':';
 #endif
 
     Type type;

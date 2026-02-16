@@ -23,8 +23,15 @@ void Command::trim(std::string& line)
     }
 }
 
+bool Command::exeInPath(std::string command)
+{
+    fs::path dummy;
+    return exeInPath(command, dummy);
+}
+
 bool Command::exeInPath(std::string command, std::filesystem::path& exePath)
 {
+    std::cerr << "checking " << command << std::endl;
     std::vector<std::string> entries = getAndParsePath();
 
     //struct stat sb;

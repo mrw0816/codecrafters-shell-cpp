@@ -12,6 +12,10 @@ public:
     ExitCommand() : Command(Type::Builtin) {}
 
     void execute(std::string args) override;
+
+private:
+    
+    std::string exeName;
 };
 
 #endif
