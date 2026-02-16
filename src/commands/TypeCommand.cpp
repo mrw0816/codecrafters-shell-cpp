@@ -112,10 +112,5 @@ std::vector<std::string> TypeCommand::getAndParsePath()
             entries.push_back(item);
     }
 
-    for (const auto& e: entries)
-    {
-        std::cout << e << "\n";
-    }
-
     return entries;
 }
