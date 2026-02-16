@@ -82,19 +82,10 @@ void TypeCommand::execute(std::string args)
                     } 
                 }
             }
-            catch(std::filesystem::filesystem_error error)
+            catch(std::filesystem::filesystem_error const& error)
             {
+                std::fprintf(stderr, "Caught exception : %s\n", error.what());
             }
-
-            
-            /*
-            //Check if entry is exists
-            if(access(entry.c_str(), F_OK) == 0)
-            {
-                //do something here
-                std::cout << "wat";
-            }
-            */
         }
         std::cout << args << ": not found" << std::endl;
     }
