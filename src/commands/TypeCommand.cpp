@@ -2,8 +2,6 @@
 #include "TypeCommand.h"
 #include <iostream>
 #include <sstream>
-#include <experimental/filesystem>
-#include <filesystem>
 
 namespace fs = std::filesystem;
 
@@ -17,94 +15,19 @@ void TypeCommand::execute(std::string args)
 {
     trim(args);
 
+    std::filesystem::path exePath;
     if (commands.contains(args))
     {
        std::cout << args << " is a shell builtin" << std::endl; 
     }
+    else if(exeInPath(args, exePath))
+    {
+        std::cout << args << " is " << exePath.string() << std::endl;
+    }
     else
     {
-        std::vector<std::string> entries = getAndParsePath();
-
-        //struct stat sb;
-        //loop through path entries
-        fs::path path;
-        std::error_code ec;
-        fs::file_status f_status;
-        fs::perms f_perms;
-        for(const auto entry : entries)
-        {
-            try
-            {
-                
-                path = fs::path(entry); 
-                //Check if entry is a directory
-                if(fs::is_directory(path))
-                {
-                    fs::path entryInDir = fs::path(path.string() + "/" + args);
-                    //Does entryInDir exist and is it a regular file?
-                    if(fs::exists(entryInDir) && fs::is_regular_file(entryInDir))
-                    {
-                        f_status = fs::status(entryInDir, ec);
-                        //Error. Just continue for now
-                        if(ec)
-                        {
-                            continue;
-                        }
-                        
-                        //Check for executable permissions
-                        fs::perms f_perms = f_status.permissions();
-                        if((fs::perms::owner_exec  & f_perms) != fs::perms::none)// ||
-                           //(fs::perms::group_exec  & f_perms) != fs::perms::none ||
-                           //(fs::perms::others_exec & f_perms) != fs::perms::none)
-                        {
-                            std::cout << args << " is " << entryInDir.string() << std::endl;
-                            return;
-                        }
-                    }
-                }
-                else if(fs::is_regular_file(path))
-                {
-                    f_status = fs::status(path, ec);
-                    //Error. Just continue for now
-                    if(ec)
-                    {
-                        continue;
-                    }
-
-                    //Check for executable permissions
-                    fs::perms f_perms = f_status.permissions();
-                    if((fs::perms::owner_exec  & f_perms) != fs::perms::none) //||
-                       //(fs::perms::group_exec  & f_perms) != fs::perms::none ||
-                       //(fs::perms::others_exec & f_perms) != fs::perms::none)
-                    {
-                        std::cout << args << " is " << path.string() << std::endl;
-                        return;
-                    } 
-                }
-            }
-            catch(std::filesystem::filesystem_error const& error)
-            {
-                std::fprintf(stderr, "Caught exception : %s\n", error.what());
-            }
-        }
         std::cout << args << ": not found" << std::endl;
     }
 
 }
 
-std::vector<std::string> TypeCommand::getAndParsePath()
-{
-    const char* path = std::getenv("PATH");
-
-    std::vector<std::string> entries;
-    std::stringstream ss(path);
-    std::string item;
-
-    while(std::getline(ss, item, SEPARATOR))
-    {
-        if(!item.empty())
-            entries.push_back(item);
-    }
-
-    return entries;
-}
