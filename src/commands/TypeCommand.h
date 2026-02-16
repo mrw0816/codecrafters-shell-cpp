@@ -21,6 +21,13 @@ private:
     const std::unordered_map<std::string, Command*>& commands;
 
     std::vector<std::string> getAndParsePath();
+
+#ifdef _WIN32
+    const char SEPARATOR = ';';
+#else
+    const char SEPARATOR = ':';
+#endif
+
 };
 
 #endif

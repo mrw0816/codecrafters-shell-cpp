@@ -103,14 +103,13 @@ void TypeCommand::execute(std::string args)
 
 std::vector<std::string> TypeCommand::getAndParsePath()
 {
-    char separator = ':';
     const char* path = std::getenv("PATH");
 
     std::vector<std::string> entries;
     std::stringstream ss(path);
     std::string item;
 
-    while(std::getline(ss, item, separator))
+    while(std::getline(ss, item, SEPARATOR))
     {
         if(!item.empty())
             entries.push_back(item);
