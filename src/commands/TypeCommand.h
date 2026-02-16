@@ -5,6 +5,7 @@
 #include "Command.h"
 #include <iostream>
 #include <unordered_map>
+#include <vector>
 
 class TypeCommand : public Command
 {
@@ -18,6 +19,8 @@ public:
 private:
     
     const std::unordered_map<std::string, Command*>& commands;
+
+    std::vector<std::string> getAndParsePath();
 };
 
 #endif
