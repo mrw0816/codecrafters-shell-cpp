@@ -40,11 +40,11 @@ void TypeCommand::execute(std::string args)
                 //Check if entry is a directory
                 if(fs::is_directory(path))
                 {
-                    fs::path pathToCheck = fs::path(path.string() + "/" + args);
-                    //Does pathToCheck exist and is it a regular file?
-                    if(fs::exists(pathToCheck) && fs::is_regular_file(pathToCheck))
+                    fs::path entryInDir = fs::path(path.string() + "/" + args);
+                    //Does entryInDir exist and is it a regular file?
+                    if(fs::exists(entryInDir) && fs::is_regular_file(entryInDir))
                     {
-                        f_status = fs::status(pathToCheck, ec);
+                        f_status = fs::status(entryInDir, ec);
                         //Error. Just continue for now
                         if(ec)
                         {
@@ -57,7 +57,7 @@ void TypeCommand::execute(std::string args)
                            //(fs::perms::group_exec  & f_perms) != fs::perms::none ||
                            //(fs::perms::others_exec & f_perms) != fs::perms::none)
                         {
-                            std::cout << args << " is " << pathToCheck.string() << std::endl;
+                            std::cout << args << " is " << entryInDir.string() << std::endl;
                             return;
                         }
                     }
