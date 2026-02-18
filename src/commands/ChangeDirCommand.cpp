@@ -7,7 +7,15 @@ void ChangeDirCommand::execute(std::string args)
     trim(args);
     std::filesystem::path dir(args);
     
-    if(std::filesystem::is_directory(dir))
+    if(args == "~")
+    {
+#ifdef _WIN32
+        chdir(getenv("USERPROFILE"));
+#else
+        chdir(getenv("HOME"));
+#endif
+    }
+    else if(std::filesystem::is_directory(dir))
     {
         chdir(args.c_str());
     }
