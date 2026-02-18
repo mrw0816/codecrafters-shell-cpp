@@ -9,20 +9,11 @@ class Command {
 
 public:
 
-    enum Type
-    {
-        Builtin,
-        External,
-        Unknown
-    };
-
     Command(){}
-    Command(Type t) : type(t) {}
     virtual ~Command() = default;
     
     virtual void execute(std::string args) = 0;
    
-    Type getType() const { return type; }
     void trim(std::string& line);
    
     static bool exeInPath(std::string command);
@@ -38,8 +29,6 @@ private:
 #else
     static const char SEPARATOR = ':';
 #endif
-
-    Type type;
 
 };
 

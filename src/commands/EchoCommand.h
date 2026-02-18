@@ -10,7 +10,7 @@ class EchoCommand : public Command
 
 public:
 
-    EchoCommand() : Command(Type::Builtin) {}
+    EchoCommand() : Command() {}
 
     void execute(std::string args) override;
  

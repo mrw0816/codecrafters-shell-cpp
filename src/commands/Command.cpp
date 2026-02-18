@@ -44,7 +44,6 @@ bool Command::exeInPath(std::string command, std::filesystem::path& exePath)
     {
         try
         {
-            
             path = fs::path(entry); 
             //Check if entry is a directory
             if(fs::is_directory(path))
@@ -93,7 +92,7 @@ bool Command::exeInPath(std::string command, std::filesystem::path& exePath)
         }
         catch(std::filesystem::filesystem_error const& error)
         {
-            std::fprintf(stderr, "Caught exception : %s\n", error.what());
+            //std::fprintf(stderr, "Caught exception : %s\n", error.what());
         }
     }
     return false;    

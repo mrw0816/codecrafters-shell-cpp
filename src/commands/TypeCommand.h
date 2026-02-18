@@ -17,7 +17,7 @@ public:
 
 private:
     
-    const std::unordered_map<std::string, std::unique_ptr<Command>>& commands;
+    const std::unordered_map<std::string, std::unique_ptr<Command>>& m_commands;
 
 };
 

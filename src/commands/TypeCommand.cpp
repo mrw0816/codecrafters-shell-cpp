@@ -6,8 +6,7 @@
 namespace fs = std::filesystem;
 
 TypeCommand::TypeCommand(const std::unordered_map<std::string, std::unique_ptr<Command>>& cmds) :
-    Command(Type::Builtin),
-    commands(cmds)
+    m_commands(cmds)
 {
 }
 
@@ -16,7 +15,7 @@ void TypeCommand::execute(std::string args)
     trim(args);
 
     std::filesystem::path exePath;
-    if (commands.contains(args))
+    if (m_commands.contains(args))
     {
         std::cout << args << " is a shell builtin" << std::endl; 
     }

@@ -9,13 +9,10 @@ class ExitCommand : public Command
 {
 public:
 
-    ExitCommand() : Command(Type::Builtin) {}
+    ExitCommand() : Command() {}
 
     void execute(std::string args) override;
 
-private:
-    
-    std::string exeName;
 };
 
 #endif
