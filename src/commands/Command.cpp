@@ -31,7 +31,6 @@ bool Command::exeInPath(std::string command)
 
 bool Command::exeInPath(std::string command, std::filesystem::path& exePath)
 {
-    std::cerr << "checking " << command << std::endl;
     std::vector<std::string> entries = getAndParsePath();
 
     //struct stat sb;
