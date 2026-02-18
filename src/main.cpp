@@ -9,6 +9,7 @@
 #include "commands/ExitCommand.h"
 #include "commands/Executable.h"
 #include "commands/PrintWorkingDirCommand.h"
+#include "commands/ChangeDirCommand.h"
 
 int main() {
     // Flush after every std::cout / std:cerr
@@ -20,6 +21,7 @@ int main() {
     commands["echo"] = std::make_unique<EchoCommand>();
     commands["type"] = std::make_unique<TypeCommand>(commands);
     commands["pwd"]  = std::make_unique<PrintWorkingDirCommand>();
+    commands["cd"]   = std::make_unique<ChangeDirCommand>();
 
     // TODO: Uncomment the code below to pass the first stage
 
